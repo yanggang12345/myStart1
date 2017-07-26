@@ -1,0 +1,30 @@
+package com.bdqn.service;
+
+import java.util.List;
+
+import com.bdqn.common.PageBean;
+import com.bdqn.entity.Product;
+
+
+
+public interface ProductService {
+	
+	PageBean<Product> findByPage(Integer page);
+	
+	PageBean<Product> findByPage(Integer page ,Integer csid);
+	
+	PageBean<Product> findByPage(Integer page ,List<Product> list);
+
+	void save(Product product);
+
+	Product findByPid(int pid);
+
+	void delete(Product product);
+
+	List<Product> findByCsid(int csid);
+
+	List<Product> findHot();
+	
+	List<Product> findNew();
+
+}

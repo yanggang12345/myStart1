@@ -1,0 +1,14 @@
+package com.bdqn.dao;
+
+import com.bdqn.entity.User;
+
+public interface UserDao extends BaseDao<User>{
+	/*
+	 * 根据用户名查询用户
+	 */
+	User findByUserName(String username);
+	/*
+	 * 根据用户激活码查询用户
+	 */
+	public User findByUserCode(String code);
+}

@@ -1,0 +1,91 @@
+package com.bdqn.dao.impl;
+
+import java.util.List;
+import java.util.Objects;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.bdqn.common.PageHibernateCallback;
+import com.bdqn.dao.ProductDao;
+import com.bdqn.entity.Product;
+
+public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao{
+
+	//带有分页的查询商品
+	public List<Product> findByPage(int begin, int limit) {
+		String hql = "from Product order by pdate desc";
+		
+		List<Product> list = this.getHibernateTemplate().execute(
+				new PageHibernateCallback<>(hql, null, begin, limit));
+		if( list != null && list.size()>0){
+			return list;
+		}
+		return null;
+	}
+	
+	
+	public List<Product> findByPage(int begin, int limit,Integer csid) {
+		String hql = "";
+		if(Objects.isNull(csid)){
+			hql = "from Product order by pdate desc";
+		}else{
+			hql = "from Product where csid= " + csid + " order by pdate desc";
+		}
+		List<Product> list = this.getHibernateTemplate().execute(
+				new PageHibernateCallback<>(hql, null, begin, limit));
+		if( list != null && list.size()>0){
+			return list;
+		}
+		return null;
+	}
+	
+
+	@Override
+	public int findCount() {
+		String hql = "select count(*) from Product";
+		List<Long> list = this.getHibernateTemplate().find(hql);
+		if( list != null && list.size()>0){
+			return list.get(0).intValue();
+		}
+		return 0;
+	}
+
+	@Override
+	public void save(Product product) {
+		this.getHibernateTemplate().saveOrUpdate(product);
+	}
+
+	@Override
+	public Product finByPid(int pid) {
+		return this.getHibernateTemplate().get(Product.class, pid);
+	}
+
+	@Override
+	public void delete(Product product) {
+		this.getHibernateTemplate().delete(product);
+	}
+
+	@Override
+	public List<Product> findHot() {
+		String sql="from Product where is_hot=1 order by pdate desc";
+		return this.getHibernateTemplate().find(sql);
+	}
+
+	@Override
+	public List<Product> findNew() {
+		DetachedCriteria criteria=DetachedCriteria.forClass(Product.class);
+		criteria.addOrder(Order.desc("pdate"));
+		List<Product> list = this.getHibernateTemplate().findByCriteria(criteria);
+		return list;
+	}
+
+	@Override
+	public List<Product> findByCsid(int csid) {
+		String sql = "from Product where csid=" + csid;
+		return this.getHibernateTemplate().find(sql);
+	}
+
+
+}

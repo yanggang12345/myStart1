@@ -1,0 +1,11 @@
+package com.bdqn.service;
+
+import com.bdqn.entity.User;
+
+public interface UserService extends BaseService<User>{
+
+	User findByUserName(String username);
+
+	User findByUserCode(String code);
+
+}

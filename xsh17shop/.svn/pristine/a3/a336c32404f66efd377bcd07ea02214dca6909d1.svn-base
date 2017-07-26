@@ -1,0 +1,8 @@
+package com.bdqn.service;
+
+import com.bdqn.entity.OrderItem;
+
+public interface OrderItemService extends BaseService<OrderItem>{
+
+	public int findLastInsertIntoId();
+}

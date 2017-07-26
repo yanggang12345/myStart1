@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/j2ee/dtd/web-jsptaglibrary_1_2.dtd">
+<!-- 定义一个标签库 -->
+<taglib>
+	<!-- 指定标签库的版本 -->
+  <tlib-version>1.0</tlib-version>
+  <!-- jsp版本 -->
+  <jsp-version>1.2</jsp-version>
+  <!-- 标签库建议的前缀 -->
+  <short-name>my</short-name>
+  <!-- 定义标签库的引用地址 -->
+  <uri>http://www.xsh17.com/tags</uri>
+  <!-- 标签库描述 -->
+  <description>
+     自定义标签库
+  </description>
+  <!-- 定义一个标签 -->
+  <tag>
+  	<!-- 标签的名字 -->
+  	<name>mytag</name>
+  	<!-- 标签的处理类 -->
+  	<tag-class>com.xsh17.cms.tags.MytagTag</tag-class>
+  	<!-- 定义标签体的类型 -->
+  	<body-content>empty</body-content>
+  	<!-- 标签的描述（注释） -->
+  	<description>这是我的自定义标签，用于显示当前系统时间</description>
+  </tag>
+  
+  <tag>
+  	<name>pager</name>
+  	<tag-class>com.xsh17.cms.tags.PagerTag</tag-class>
+  	<body-content>empty</body-content>
+  	<!-- 定义一个属性 -->
+  	<attribute>
+  		<!-- 定义参数名 -->
+  		<name>pager</name>
+  		<!-- 该参数是否是必填 -->
+  		<required>true</required>
+  		<!-- 该参数是否接受el表达式 -->
+  		<rtexprvalue>true</rtexprvalue>
+  		<!-- 设置参数类型 -->
+  		<type>com.bdqn.common.Pager</type>
+  		<!-- 参数描述 -->
+  		<description>分页对象</description>
+  	</attribute>
+  	<attribute>
+  		<name>url</name>
+  		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+		<type>java.lang.String</type>
+		<description>分页链接</description>  		
+  	</attribute>
+  </tag>
+ 
+</taglib>

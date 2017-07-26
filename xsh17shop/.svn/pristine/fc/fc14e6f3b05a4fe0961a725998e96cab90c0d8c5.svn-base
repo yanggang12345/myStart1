@@ -1,0 +1,16 @@
+package com.bdqn.service;
+
+import com.bdqn.common.PageBean;
+import com.bdqn.entity.Product;
+
+public interface ProductService {
+
+	PageBean<Product> findByPage(Integer page);
+
+	void save(Product product);
+
+	Product findByPid(int pid);
+
+	void delete(Product product);
+
+}

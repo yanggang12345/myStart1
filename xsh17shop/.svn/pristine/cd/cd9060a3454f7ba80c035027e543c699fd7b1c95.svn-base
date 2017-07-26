@@ -1,0 +1,55 @@
+package com.bdqn.service.impl;
+
+import java.util.List;
+
+import com.bdqn.common.PageBean;
+import com.bdqn.dao.OrderDao;
+import com.bdqn.entity.Order;
+import com.bdqn.entity.OrderItem;
+import com.bdqn.service.OrderService;
+
+public class OrderServiceImpl implements OrderService {
+
+	private OrderDao orderDao;
+
+	public void setOrderDao(OrderDao orderDao) {
+		this.orderDao = orderDao;
+	}
+
+	@Override
+	public PageBean<Order> findByPage(Integer page) {
+		PageBean<Order> pageBean = new PageBean<>();
+		//设置页数
+		pageBean.setPage(page);
+		int limit = 10;
+		pageBean.setLimit(limit);
+		
+		int totalCount = orderDao.findCount();
+		pageBean.setTotalCount(totalCount);
+		
+		int totalPage = 0;
+		totalPage = (totalCount+limit-1)/limit;
+		pageBean.setTotalPage(totalPage);
+		
+		int begin = (page -1)*limit;
+		List<Order> list = orderDao.findByPage(begin,limit);
+		pageBean.setList(list);
+		
+		return pageBean;
+	}
+
+	@Override
+	public List<OrderItem> findByOrderItem(Integer oid) {
+		return orderDao.findByOrderItem(oid);
+	}
+
+	@Override
+	public void update(Order order) {
+		orderDao.update(order);
+	}
+
+	@Override
+	public Order findByOid(Integer oid) {
+		return orderDao.findByOid(oid);
+	}
+}

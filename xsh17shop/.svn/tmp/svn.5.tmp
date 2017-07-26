@@ -1,0 +1,28 @@
+package com.bdqn.dao;
+
+import java.util.List;
+
+import com.bdqn.entity.Order;
+import com.bdqn.entity.OrderItem;
+
+public interface OrderDao {
+
+	List<Order> findByPage(int begin, int limit);
+
+	int findCount();
+	
+	int findCountByUid(int uid);
+
+	List<OrderItem> findByOrderItem(Integer oid);
+
+	void update(Order order);
+
+	Order findByOid(Integer oid);
+	
+	void save(Order order);
+	
+	public int findLastInsertIntoId();
+	
+	List<Order> findByPageWithState(int begin, int limit,int uid);
+
+}

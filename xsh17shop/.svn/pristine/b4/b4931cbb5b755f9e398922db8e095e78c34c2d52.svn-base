@@ -1,0 +1,21 @@
+package com.bdqn.dao;
+
+import java.util.List;
+
+public interface BaseDao<E> {
+
+	//查询
+	public List<Object> get();
+	
+	//添加
+	public int save(E entity);
+	
+	//删除
+	public int delete(int id);
+	
+	//修改
+	public int update(E entity);
+	
+	//查询全部
+	public List<E> findAll();
+}

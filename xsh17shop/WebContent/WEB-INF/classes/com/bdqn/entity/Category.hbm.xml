@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="com.bdqn.entity.Category" table="category">
+		<id name="cid">
+			<generator class="native"/>
+		</id>
+		<property name="cname"/>
+		<!-- 级联删除 -->
+		<set order-by="csid" name="categorySeconds" cascade="delete" lazy="false">
+			<key column="cid"></key>
+			<one-to-many class="com.bdqn.entity.CategorySecond"/>
+		</set>
+	</class>
+</hibernate-mapping>

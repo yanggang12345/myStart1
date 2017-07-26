@@ -1,0 +1,11 @@
+package com.bdqn.service;
+
+import java.util.List;
+
+public interface BaseService<T> {
+	public int save(T entity);
+	public int update(T entity);
+	public int delete(int id);
+	public T findById(int id);
+	public List<T> findAll();
+}

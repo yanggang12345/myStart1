@@ -1,0 +1,25 @@
+package com.bdqn.web;
+
+import java.awt.image.BufferedImage;
+import java.io.OutputStream;
+
+import javax.imageio.ImageIO;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.bdqn.common.RandomCodeGenerator;
+import com.opensymphony.xwork2.ActionSupport;
+
+
+public class CheckImageAction extends ActionSupport{
+
+	@Override
+	public String execute() throws Exception {
+		OutputStream output = null;
+		RandomCodeGenerator rcg = new RandomCodeGenerator();
+		BufferedImage image = rcg.generator(output);
+		ImageIO.write(image, "jpg", ServletActionContext.getResponse()
+				.getOutputStream());
+		return NONE;
+	}
+}

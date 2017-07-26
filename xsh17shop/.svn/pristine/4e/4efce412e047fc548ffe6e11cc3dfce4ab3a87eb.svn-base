@@ -1,0 +1,13 @@
+package com.bdqn.dao;
+
+import java.util.List;
+
+import com.bdqn.entity.OrderItem;
+
+
+public interface OrderItemDao extends BaseDao<OrderItem> {
+
+	public int findLastInsertIntoId();
+	
+	List<OrderItem> findByOid(int oid);
+}

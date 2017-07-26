@@ -1,0 +1,15 @@
+package com.bdqn.service;
+
+import java.util.List;
+
+import com.bdqn.entity.Category;
+
+public interface categoryService {
+	public List<Category> findAll();
+
+	public void save(Category category);
+
+	public void delete(Category category);
+	
+	public Category findByCid(Integer cid);
+}

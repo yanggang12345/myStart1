@@ -1,0 +1,59 @@
+package com.bdqn.dao.impl;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.bdqn.dao.BaseDao;
+
+public class BaseDaoImpl<E> extends HibernateDaoSupport implements BaseDao<E> {
+
+	//实体类
+	private Class<E> entityClass;
+	
+	//使用注解方式进行依赖注入
+		@Resource
+		public void setMySessionFactory(SessionFactory sessionFactory) {
+			super.setSessionFactory(sessionFactory);
+
+		}
+	
+		/*
+		 * 在构造方法中操作的实体类型
+		 */
+		public BaseDaoImpl() {
+			//获得父类（BaseDaoImpl<T>）类型
+			ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
+			//获得父类上的泛型数组
+			Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
+			entityClass = (Class<E>) actualTypeArguments[0];
+		}
+
+	@Override
+	public void saveOrUpdate(E entity) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().saveOrUpdate(entity);
+	}
+
+	@Override
+	public void delete(int id) {
+		this.getHibernateTemplate().delete(id);
+	}
+
+	@Override
+	public List<E> findAll() {
+		String hql="FROM "+entityClass.getSimpleName();
+		return this.getHibernateTemplate().find(hql);
+	}
+
+	@Override
+	public E findById(int id) {
+		return this.getHibernateTemplate().get(entityClass, id);
+	}
+
+}

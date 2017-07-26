@@ -1,0 +1,22 @@
+package com.bdqn.service;
+
+import java.util.List;
+
+import com.bdqn.common.PageBean;
+import com.bdqn.entity.Order;
+import com.bdqn.entity.OrderItem;
+
+public interface OrderService {
+
+	PageBean<Order> findByPage(Integer page);
+
+	List<OrderItem> findByOrderItem(Integer oid);
+
+	void update(Order order);
+
+	Order findByOid(Integer oid);
+
+
+	List<Order> findByState(Integer state);
+
+}

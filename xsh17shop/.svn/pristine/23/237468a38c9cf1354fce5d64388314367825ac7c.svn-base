@@ -1,0 +1,25 @@
+package com.bdqn.interceptor;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.bdqn.entity.AdminUser;
+import com.opensymphony.xwork2.ActionInvocation;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
+
+public class PrivilegeInterceptor extends MethodFilterInterceptor{
+
+	@Override
+	protected String doIntercept(ActionInvocation actionInvocation) throws Exception {
+		//判断session中是否报讯了后台用户的信息
+		AdminUser existUser = (AdminUser) ServletActionContext.getRequest().getSession().getAttribute("existAdminUser");
+		if(existUser == null){
+			ActionSupport as =(ActionSupport) actionInvocation.getAction();
+			as.addActionError("您还未登陆");
+			return "loginFail";
+		}else{
+			return actionInvocation.invoke();
+		}
+	}
+
+}

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+
+	<package name="shop" extends="struts-default" >
+		<interceptors>
+	        <interceptor name="PrivilegeInterceptor" class="PrivilegeInterceptor" />
+		    <interceptor name="UserLoginInterceptor" class="UserLoginInterceptor"></interceptor>
+		    
+	        <interceptor-stack name="Privilege">
+	            <interceptor-ref name="PrivilegeInterceptor" />
+	            <interceptor-ref name="defaultStack" />
+	        </interceptor-stack>
+<<<<<<< .mine
+	    </interceptors>
+		<!-- <interceptors>
+		
+		        <interceptor name="PrivilegeInterceptor" class="PrivilegeInterceptor" />
+		        <interceptor name="UserLoginInterceptor" class="UserLoginInterceptor"></interceptor>
+		        <interceptor-stack name="Privilege">
+		            <interceptor-ref name="PrivilegeInterceptor" />
+		            <interceptor-ref name="defaultStack" />
+		        </interceptor-stack>
+		    </interceptors>
+		    
+		<interceptors>
+			<interceptor name="PrivilegeInterceptor" class="com.bdqn.interceptor.PrivilegeInterceptor"></interceptor>
+		</interceptors>
+		
+		
+		
+		</interceptors>
+			<interceptor name="PrivilegeInterceptor" class="PrivilegeInterceptor"></interceptor>
+		</interceptors> -->
+		
+=======
+	   
+>>>>>>> .r58
+		<global-results>
+			<result name="msg">/WEB-INF/jsp/msg.jsp</result>
+			<result name="login">/WEB-INF/jsp/loginPage.jsp</result>
+			<result name="loginFail">/WEB-INF/admin/index.jsp</result>
+			<result name="index">/WEB-INF/jsp/index.jsp</result>
+			<result name="index" type="redirect">index.action</result>
+		</global-results>
+		
+		<action name="index" class="indexAction">
+			<result name="index">/WEB-INF/jsp/index.jsp</result>
+		</action>
+	
+		<action name="order_*" class="OrderAction" method="{1}">
+			<result name="saveOrder">/WEB-INF/jsp/order.jsp</result>
+			<result name="updateStateSuccess" type="redirect">order_findByUid.action</result>
+			<result name="findByUid">/WEB-INF/jsp/orderList.jsp</result>
+			<result name="list" type="redirect">order_findByUid.action</result>
+			<interceptor-ref name="UserLoginInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="cart_*" class="cartAction" method="{1}">
+			<result name="addCart" type="redirect">cart_myCart.action</result>
+			<result name="removeCart" type="redirect">cart_myCart.action</result>
+			<result name="clearCart" type="redirect">cart_myCart.action</result>
+			<result name="myCart">/WEB-INF/jsp/cart.jsp</result>
+		</action>
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="product">/WEB-INF/jsp/product.jsp</result>
+		</action>
+		<action name="index" class="indexAction">
+			<result name="index">/WEB-INF/jsp/index.jsp</result>
+		</action>
+		<action name="admin" class="adminAction">
+			<result>/WEB-INF/admin/index.jsp</result>
+		</action>
+		<action name="frame_*" class="frameAction" method="{1}">
+			<result name="top">/WEB-INF/admin/top.jsp</result>
+			<result name="left">/WEB-INF/admin/left.jsp</result>
+			<result name="welcome">/WEB-INF/admin/welcome.jsp</result>
+			<result name="bottom">/WEB-INF/admin/bottom.jsp</result>
+		</action>
+		<action name="adminUser_*" class="adminUserAction" method="{1}">
+			<result name="loginFail">/WEB-INF/admin/index.jsp</result>
+			<result name="loginSuccess" type="redirect">adminUser_home.action</result>
+			<result name="home">/WEB-INF/admin/home.jsp</result>
+		</action>
+		
+		<action name="adminCategory_*" class="adminCategoryAction" method="{1}">
+			<result name="findAll">/WEB-INF/admin/category/list.jsp</result>
+			<result name="saveSuccess" type="redirect">adminCategory_findAll.action</result>
+			<result name="editSuccess">/WEB-INF/admin/category/edit.jsp</result>
+			<interceptor-ref name="Privilege"></interceptor-ref>
+			<result name="editSuccess">/WEB-INF/admin/category/edit.jsp</result>
+			<interceptor-ref name="PrivilegeInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="editSuccess">/WEB-INF/admin/category/edit.jsp</result>
+			<interceptor-ref name="Privilege"></interceptor-ref>
+		</action>
+		
+		<action name="adminCategorySecond_*" class="adminCategorySecondAction" method="{1}">
+			<result name="findAll">/WEB-INF/admin/categorySecond/list.jsp</result>
+			<result name="addPage">/WEB-INF/admin/categorySecond/add.jsp</result>
+			<result name="saveSuccess" type="redirect">adminCategorySecond_findAll.action?page=1</result>
+			<result name="deleteSuccess" type="redirect">adminCategorySecond_findAll.action?page=1</result>
+			<result name="editSuccess">/WEB-INF/admin/categorySecond/add.jsp</result>
+		</action>
+		
+		<action name="adminProduct_*" class="adminProductAction" method="{1}">
+			<result name="findAll">/WEB-INF/admin/product/list.jsp</result>
+			<result name="addPageSuccess">/WEB-INF/admin/product/add.jsp</result>
+			<result name="saveSuccess" type="redirect">adminProduct_findAll.action?page=1</result>
+			<result name="editSuccess">/WEB-INF/admin/product/edit.jsp</result>
+			<interceptor-ref name="Privilege"></interceptor-ref>
+		</action>
+		
+		<action name="adminOrder_*" class="adminOrderAction" method="{1}">
+			<result name="findAll">/WEB-INF/admin/order/list.jsp</result>
+			<result name="updateState" type="redirect">adminOrder_findAll.action?page=1</result>
+			<interceptor-ref name="Privilege"></interceptor-ref>
+					<interceptor-ref name="PrivilegeInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="Privilege"></interceptor-ref>
+			<result name="findByState">/WEB-INF/admin/order/stateList.jsp</result>		
+		</action>
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registPage">/WEB-INF/jsp/registPage.jsp</result>
+			<result name="loginPage">/WEB-INF/jsp/loginPage.jsp</result>
+			<result name="msg">/WEB-INF/jsp/msg.jsp</result>
+			<result name="input">/WEB-INF/jsp/registPage.jsp</result>
+			<result name="quit" type="redirect">index</result>
+			<result name="checkcodeFail">/WEB-INF/jsp/registPage.jsp</result>
+			<result name="findAll">/WEB-INF/jsp/admin/user/list.jsp</result>
+		</action>
+		<action name="checkImg" class="checkImgAction"></action>
+		
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="findByCid">/WEB-INF/jsp/productList.jsp</result>
+			<result name="findByPid">/WEB-INF/jsp/product.jsp</result>
+		</action>
+		
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registPage">/WEB-INF/jsp/registPage.jsp</result>
+			<result name="loginPage">/WEB-INF/jsp/loginPage.jsp</result>
+			<result name="msg">/WEB-INF/jsp/msg.jsp</result>
+			<result name="input">/WEB-INF/jsp/registPage.jsp</result>
+			<result name="quit" type="redirect">index</result>
+			<result name="checkcodeFail">/WEB-INF/jsp/registPage.jsp</result>
+			<result name="findAll">/WEB-INF/admin/user/list.jsp</result>
+		</action>
+		<action name="checkImg" class="checkImgAction"></action>
+	</package>
+</struts>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="D:/java/MyWorkPlace/crm/WebContent/WEB-INF/lib/com.springsource.org.apache.log4j-1.2.15.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
